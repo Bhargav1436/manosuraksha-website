@@ -1,0 +1,16 @@
+{
+  "name": "Manosuraksha - Nurturing Minds",
+  "short_name": "Manosuraksha",
+  "description": "Leading mental health clinic in Bengaluru offering psychiatry, psychology, and holistic care.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fdf8f2",
+  "theme_color": "#5b7a5e",
+  "icons": [
+    {
+      "src": "/images/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

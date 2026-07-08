@@ -1,0 +1,118 @@
+import { type Program } from "@/types";
+
+export const programs: Program[] = [
+  {
+    id: "1",
+    slug: "mind-insight",
+    title: "Mind Insight",
+    subtitle: "General Mental Health",
+    description:
+      "Comprehensive psychiatric evaluation and treatment for a wide range of mental health conditions. Our experienced team of psychiatrists and psychologists work together to provide evidence-based care tailored to each individual's needs. From diagnosis to long-term management, we walk alongside you on your journey to mental wellness.",
+    conditions: [
+      "Depression",
+      "Anxiety Disorders",
+      "Schizophrenia",
+      "Bipolar Disorder",
+      "Adult ADHD",
+      "Personality Disorders",
+      "OCD",
+      "PTSD",
+      "Phobias",
+      "Sleep Disorders",
+    ],
+    icon: "Brain",
+    image: "/images/programs/mind-insight.png",
+  },
+  {
+    id: "2",
+    slug: "mind-recover",
+    title: "Mind Recover",
+    subtitle: "Substance Use Treatment",
+    description:
+      "Specialized de-addiction and substance use treatment program designed to help individuals break free from the cycle of dependency. Our multidisciplinary team provides medically supervised detoxification, individual and group therapy, relapse prevention planning, and family support to ensure a holistic and sustainable recovery.",
+    conditions: [
+      "Alcohol Dependence",
+      "Tobacco & Nicotine Addiction",
+      "Cannabis Use Disorder",
+      "Opioid Dependence",
+      "Recreational Drug Abuse",
+      "Prescription Drug Misuse",
+    ],
+    icon: "HeartPulse",
+    image: "/images/programs/mind-recover.png",
+  },
+  {
+    id: "3",
+    slug: "mind-shift",
+    title: "Mind Shift",
+    subtitle: "Behavioral Addictions",
+    description:
+      "Targeted intervention program for behavioral and process addictions that are increasingly prevalent in the digital age. We combine cognitive-behavioral strategies, motivational interviewing, and family-based interventions to help individuals regain control over compulsive behaviors and rebuild a balanced life.",
+    conditions: [
+      "Internet Addiction",
+      "Gaming Addiction",
+      "Gambling Disorder",
+      "Stock Trading Addiction",
+      "Social Media Addiction",
+      "Compulsive Shopping",
+    ],
+    icon: "RefreshCw",
+    image: "/images/programs/mind-shift.png",
+  },
+  {
+    id: "4",
+    slug: "mind-nurture",
+    title: "Mind Nurture",
+    subtitle: "Children's Mental Health",
+    description:
+      "Dedicated child and adolescent mental health program offering comprehensive assessment, diagnosis, and treatment for young minds. Our child psychiatrists and psychologists use age-appropriate, evidence-based, and play-based therapeutic approaches to support children and their families through developmental and emotional challenges.",
+    conditions: [
+      "Autism Spectrum Disorder",
+      "ADHD",
+      "Intellectual Disability",
+      "Developmental Disorders",
+      "Scholastic Challenges",
+      "Learning Disabilities",
+      "Behavioral Issues",
+      "Childhood Anxiety & Depression",
+    ],
+    icon: "Baby",
+    image: "/images/programs/mind-nurture.png",
+  },
+  {
+    id: "5",
+    slug: "tele-minds",
+    title: "Tele Minds",
+    subtitle: "Virtual Consultations",
+    description:
+      "Access quality mental healthcare from the comfort of your home through our secure virtual consultation platform. Tele Minds connects you with our team of psychiatrists, psychologists, and therapists via video and audio calls, ensuring continuity of care regardless of geographical barriers. Ideal for follow-up consultations, therapy sessions, and ongoing support.",
+    conditions: [
+      "Follow-up Consultations",
+      "Therapy Sessions",
+      "Psychiatric Reviews",
+      "Counseling",
+      "Second Opinions",
+      "Mental Health Check-ins",
+    ],
+    icon: "Video",
+    image: "/images/programs/tele-minds.png",
+  },
+  {
+    id: "6",
+    slug: "brain-stimulation",
+    title: "Brain Stimulation",
+    subtitle: "rTMS Neuro-modulation",
+    description:
+      "Repetitive Transcranial Magnetic Stimulation (rTMS) is a non-invasive brain stimulation technique that uses magnetic pulses to modulate neural activity. This evidence-based treatment is particularly effective for individuals who have not responded adequately to medications or therapy alone. Our trained professionals administer rTMS in a safe and comfortable clinical setting.",
+    conditions: [
+      "Treatment-resistant Depression",
+      "Anxiety Disorders",
+      "OCD",
+      "Chronic Pain",
+      "Cognitive Enhancement",
+      "Neurological Rehabilitation",
+    ],
+    icon: "Zap",
+    image: "/images/programs/brain-stimulation.png",
+  },
+];

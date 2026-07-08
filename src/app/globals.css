@@ -1,26 +1,61 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --sage: #5b7a5e;
+  --sage-light: #7a9a7d;
+  --sage-dark: #3d5a40;
+  --warm: #c4956a;
+  --warm-light: #dbb894;
+  --warm-dark: #a67a50;
+  --cream: #fdf8f2;
+  --cream-dark: #f5ece0;
+  --blush: #f0e4d8;
+  --dark: #3a3530;
+  --muted: #7a7470;
+  --light-border: #e8e0d6;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Nunito Sans', system-ui, sans-serif;
+  color: var(--dark);
+  background: var(--cream);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Libre Baskerville', Georgia, serif;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--cream);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--sage-light);
+  border-radius: 4px;
+}
+
+/* Selection color */
+::selection {
+  background: var(--sage);
+  color: white;
+}
+
+/* Nav link hover */
+.nav-link:hover {
+  color: #ffffff !important;
+}
+
+/* Shimmer animation for skeletons */
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
