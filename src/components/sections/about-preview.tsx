@@ -252,7 +252,7 @@ export const AboutPreview = () => {
             What if this is your moment? Together, let us make that leap.
           </p>
           <Link
-            href="/about"
+            href="/book-appointment"
             className={cn(
               "relative inline-flex items-center gap-2.5 mt-8",
               "px-7 py-3.5 rounded-full",
