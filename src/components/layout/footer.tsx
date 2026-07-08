@@ -204,6 +204,25 @@ export const Footer = () => {
               and evidence-based practices. We believe in nurturing every mind
               with dignity and warmth.
             </p>
+            <Link
+              href="/foundation"
+              className="footer-link"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "8px",
+                marginTop: "16px",
+                fontSize: "13px",
+                fontWeight: 700,
+                color: "#dbb894",
+                textDecoration: "none",
+              }}
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="#dbb894" stroke="#dbb894" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+                <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+              </svg>
+              Manosuraksha Mental Health Foundation
+            </Link>
           </div>
 
           {/* Col 2: Quick Links */}
@@ -343,7 +362,7 @@ export const Footer = () => {
                     <br />
                     <span>Sunday: Closed</span>
                     <br />
-                    <span style={{ fontSize: "11px", fontStyle: "italic", opacity: 0.7 }}>
+                    <span style={{ fontSize: "11px", fontStyle: "italic", color: "#dbb894" }}>
                       *prior appointment is highly recommended
                     </span>
                   </div>

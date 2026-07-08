@@ -10,6 +10,8 @@ import {
   Phone,
   ArrowLeft,
   ArrowRight,
+  ChevronLeft,
+  ChevronRight,
   Loader2,
   Star,
 } from "lucide-react";
@@ -191,7 +193,8 @@ export function BookingModal({ doctor, onClose }: BookingModalProps) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4"
+      className="fixed inset-0 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4"
+      style={{ zIndex: 1100 }}
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
@@ -219,6 +222,9 @@ export function BookingModal({ doctor, onClose }: BookingModalProps) {
             <div className="min-w-0">
               <p className="font-bold text-[#3a3530] text-sm truncate">
                 {doctor.name}
+              </p>
+              <p className="text-[11px] text-[#5b7a5e] font-semibold truncate">
+                {doctor.role}
               </p>
               <p className="text-xs text-[#7a7470] flex items-center gap-1">
                 <Star className="w-3 h-3 fill-[#c4956a] text-[#c4956a]" />
@@ -334,30 +340,11 @@ export function BookingModal({ doctor, onClose }: BookingModalProps) {
                   Pick Date & Time
                 </h3>
 
-                {/* Date cards */}
-                <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
-                  {next7Days.map((day) => {
-                    const date = new Date(day + "T00:00:00");
-                    const dayNum = date.getDate();
-                    const label = formatDateLabel(day);
-                    return (
-                      <button
-                        key={day}
-                        onClick={() => setSelectedDate(day)}
-                        className={`shrink-0 flex flex-col items-center px-3 py-2.5 rounded-2xl text-sm transition-all cursor-pointer min-w-[64px] ${
-                          selectedDate === day
-                            ? "bg-[#5b7a5e] text-white shadow-md"
-                            : "bg-[#fdf8f2] text-[#7a7470] hover:bg-[#5b7a5e]/10 border border-[#e8e0d4]"
-                        }`}
-                      >
-                        <span className="text-xs font-medium">{label}</span>
-                        <span className="text-base font-bold mt-0.5">
-                          {dayNum}
-                        </span>
-                      </button>
-                    );
-                  })}
-                </div>
+                {/* Calendar */}
+                <ModalCalendar
+                  selectedDate={selectedDate}
+                  onSelectDate={setSelectedDate}
+                />
 
                 {/* Slots */}
                 {slotsLoading ? (
@@ -594,3 +581,132 @@ function ModalInput({
     </div>
   );
 }
+
+// ---------------------------------------------------------------------------
+// ModalCalendar — single month with < > navigation
+// ---------------------------------------------------------------------------
+
+const WEEKDAYS_MODAL = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
+
+function ModalCalendar({
+  selectedDate,
+  onSelectDate,
+}: {
+  selectedDate: string;
+  onSelectDate: (date: string) => void;
+}) {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const [viewYear, setViewYear] = useState(today.getFullYear());
+  const [viewMonth, setViewMonth] = useState(today.getMonth());
+
+  const monthNames = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December",
+  ];
+
+  const firstDay = new Date(viewYear, viewMonth, 1).getDay();
+  const daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
+
+  const toDateStr = (y: number, m: number, d: number) =>
+    `${y}-${String(m + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
+
+  const todayStr = toDateStr(today.getFullYear(), today.getMonth(), today.getDate());
+
+  const canGoPrev =
+    viewYear > today.getFullYear() ||
+    (viewYear === today.getFullYear() && viewMonth > today.getMonth());
+
+  const prevMonth = () => {
+    if (!canGoPrev) return;
+    if (viewMonth === 0) { setViewMonth(11); setViewYear(viewYear - 1); }
+    else { setViewMonth(viewMonth - 1); }
+  };
+
+  const nextMonth = () => {
+    if (viewMonth === 11) { setViewMonth(0); setViewYear(viewYear + 1); }
+    else { setViewMonth(viewMonth + 1); }
+  };
+
+  return (
+    <div className="bg-[#fdf8f2] rounded-2xl p-3 border border-[#e8e0d4]">
+      {/* Month/Year header with arrows */}
+      <div className="flex items-center justify-between mb-2">
+        <button
+          onClick={prevMonth}
+          disabled={!canGoPrev}
+          className="w-7 h-7 rounded-lg flex items-center justify-center hover:bg-[#5b7a5e]/10 transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
+        >
+          <ChevronLeft className="w-4 h-4 text-[#3a3530]" />
+        </button>
+        <span className="text-sm font-bold text-[#3a3530]">
+          {monthNames[viewMonth]} {viewYear}
+        </span>
+        <button
+          onClick={nextMonth}
+          className="w-7 h-7 rounded-lg flex items-center justify-center hover:bg-[#5b7a5e]/10 transition-colors cursor-pointer"
+        >
+          <ChevronRight className="w-4 h-4 text-[#3a3530]" />
+        </button>
+      </div>
+
+      {/* Weekday headers */}
+      <div className="grid grid-cols-7 gap-1 mb-1">
+        {WEEKDAYS_MODAL.map((w) => (
+          <div key={w} className="text-center text-[10px] font-semibold text-[#7a7470] uppercase">
+            {w}
+          </div>
+        ))}
+      </div>
+
+      {/* Day grid */}
+      <div className="grid grid-cols-7 gap-1">
+        {Array.from({ length: firstDay }).map((_, i) => (
+          <div key={`empty-${i}`} />
+        ))}
+
+        {Array.from({ length: daysInMonth }).map((_, i) => {
+          const day = i + 1;
+          const dateStr = toDateStr(viewYear, viewMonth, day);
+          const dateObj = new Date(viewYear, viewMonth, day);
+          const isPast = dateObj < today;
+          const isSunday = dateObj.getDay() === 0;
+          const isDisabled = isPast || isSunday;
+          const isSelected = dateStr === selectedDate;
+          const isToday = dateStr === todayStr;
+
+          return (
+            <button
+              key={day}
+              disabled={isDisabled}
+              onClick={() => onSelectDate(dateStr)}
+              className={`w-full aspect-square rounded-lg text-xs font-medium transition-all cursor-pointer flex items-center justify-center ${
+                isSelected
+                  ? "bg-[#5b7a5e] text-white shadow-md font-bold"
+                  : isToday
+                    ? "bg-[#5b7a5e]/15 text-[#5b7a5e] font-bold border border-[#5b7a5e]/30"
+                    : isDisabled
+                      ? "text-[#7a7470]/25 cursor-not-allowed"
+                      : "text-[#3a3530] hover:bg-[#5b7a5e]/10"
+              }`}
+            >
+              {day}
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Selected date label */}
+      <div className="mt-2 text-center">
+        <span className="text-xs text-[#7a7470]">
+          Selected:{" "}
+          <span className="font-semibold text-[#3a3530]">
+            {formatDateLabel(selectedDate)}
+          </span>
+        </span>
+      </div>
+    </div>
+  );
+}
+

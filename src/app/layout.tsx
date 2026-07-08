@@ -3,6 +3,7 @@ import { Libre_Baskerville, Nunito_Sans } from "next/font/google";
 import { TopBar } from "@/components/layout/top-bar";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
+import { FoundationFab } from "@/components/shared/foundation-fab";
 import "./globals.css";
 
 const libreBaskerville = Libre_Baskerville({
@@ -65,6 +66,7 @@ export default function RootLayout({
         <Navbar />
         <main className="min-h-screen flex-1" style={{ paddingTop: 108 }}>{children}</main>
         <Footer />
+        <FoundationFab />
       </body>
     </html>
   );

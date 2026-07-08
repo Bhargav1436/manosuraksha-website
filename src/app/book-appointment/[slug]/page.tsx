@@ -290,7 +290,7 @@ export default function DoctorProfilePage({
             <h2 className="text-2xl font-bold text-[#3a3530] font-[var(--font-serif)] mb-4">
               About
             </h2>
-            <p className="text-[#7a7470] leading-relaxed text-lg">
+            <p className="text-[#7a7470] leading-relaxed text-lg text-justify">
               {doctor.bio}
             </p>
           </div>
@@ -645,21 +645,13 @@ function MiniCalendar({
   const daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
 
   const prevMonth = () => {
-    if (viewMonth === 0) {
-      setViewMonth(11);
-      setViewYear(viewYear - 1);
-    } else {
-      setViewMonth(viewMonth - 1);
-    }
+    if (viewMonth === 0) { setViewMonth(11); setViewYear(viewYear - 1); }
+    else { setViewMonth(viewMonth - 1); }
   };
 
   const nextMonth = () => {
-    if (viewMonth === 11) {
-      setViewMonth(0);
-      setViewYear(viewYear + 1);
-    } else {
-      setViewMonth(viewMonth + 1);
-    }
+    if (viewMonth === 11) { setViewMonth(0); setViewYear(viewYear + 1); }
+    else { setViewMonth(viewMonth + 1); }
   };
 
   const toDateStr = (y: number, m: number, d: number) =>
@@ -667,7 +659,6 @@ function MiniCalendar({
 
   const todayStr = toDateStr(today.getFullYear(), today.getMonth(), today.getDate());
 
-  // Can't go to months before current month
   const canGoPrev =
     viewYear > today.getFullYear() ||
     (viewYear === today.getFullYear() && viewMonth > today.getMonth());
@@ -697,10 +688,7 @@ function MiniCalendar({
       {/* Day names */}
       <div className="grid grid-cols-7 gap-1 mb-1">
         {dayNames.map((d) => (
-          <div
-            key={d}
-            className="text-center text-[11px] font-semibold text-[#7a7470] py-1"
-          >
+          <div key={d} className="text-center text-[11px] font-semibold text-[#7a7470] py-1">
             {d}
           </div>
         ))}
@@ -708,7 +696,6 @@ function MiniCalendar({
 
       {/* Day cells */}
       <div className="grid grid-cols-7 gap-1">
-        {/* Empty cells before first day */}
         {Array.from({ length: firstDay }).map((_, i) => (
           <div key={`empty-${i}`} />
         ))}
@@ -725,14 +712,13 @@ function MiniCalendar({
           return (
             <button
               key={day}
-              disabled={isPast}
+              disabled={isPast || isSunday}
               onClick={() => onSelect(dateStr)}
-              className={`h-9 rounded-lg text-sm font-medium transition-all cursor-pointer
-                ${isPast ? "text-[#7a7470]/30 cursor-not-allowed" : ""}
-                ${isSelected ? "bg-[#5b7a5e] text-white shadow-md" : ""}
+              className={`h-9 rounded-lg text-sm font-medium transition-all cursor-pointer flex items-center justify-center
+                ${isPast || isSunday ? "text-[#7a7470]/25 cursor-not-allowed" : ""}
+                ${isSelected ? "bg-[#5b7a5e] text-white shadow-md font-bold" : ""}
                 ${isToday && !isSelected ? "bg-[#c4956a]/15 text-[#c4956a] font-bold" : ""}
-                ${!isPast && !isSelected && !isToday ? "text-[#3a3530] hover:bg-[#5b7a5e]/10" : ""}
-                ${isSunday && !isPast && !isSelected ? "!text-[#c4956a]" : ""}
+                ${!isPast && !isSunday && !isSelected && !isToday ? "text-[#3a3530] hover:bg-[#5b7a5e]/10" : ""}
               `}
             >
               {day}

@@ -51,7 +51,7 @@ export const beliefs: Belief[] = [
     title: "Inclusive Care, Diverse Voices",
     subtitle: "Access to mental health is not just a service; it's a fundamental right.",
     description:
-      "It's a fundamental right that transcends the boundaries of geography, culture, language, race and gender. Our team includes therapists proficient in Kannada, English, Hindi, Tamil, Malayalam, Bengali, Assamese, and Marathi. We are committed to expanding this diversity, ensuring that everyone finds a voice in their journey towards well-being.",
+      "Access to mental health is not just a service; it's a fundamental right that transcends the boundaries of geography, culture, language, race and gender. Our team includes therapists proficient in Kannada, English, Hindi, Tamil, Malayalam, Bengali, Assamese, and Marathi. We are committed to expanding this diversity, ensuring that everyone finds a voice in their journey towards well-being.",
     icon: "Globe",
     image: "/images/beliefs/06.png",
   },

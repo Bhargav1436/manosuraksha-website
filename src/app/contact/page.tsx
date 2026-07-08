@@ -45,6 +45,7 @@ const contactInfo = [
     title: "Working Hours",
     detail: "Mon - Sat: 9:00 AM - 9:00 PM",
     subDetail: "Sunday: Closed",
+    note: "*prior appointment is highly recommended",
     color: "#9b7b5e",
     bg: "#9b7b5e12",
   },
@@ -55,7 +56,7 @@ export default function ContactPage() {
     <PageTransition>
       <PageHero
         title="Connect With Us"
-        subtitle="We want you to know that it's OKAY to feel the way you do. You're not alone in this, and you've come to the right place. Reach out to us because you deserve the best."
+        subtitle="We want you to know that it's OKAY to feel the way you do. You're not alone in this, and you've come to the right place. Reach out to us because you deserve the best. Let us be your compass on this journey to self-discovery, resilience, and a brighter future."
         breadcrumb="Contact Us"
       />
 
@@ -178,6 +179,18 @@ export default function ContactPage() {
                                     }}
                                   >
                                     {item.subDetail}
+                                  </p>
+                                )}
+                                {"note" in item && item.note && (
+                                  <p
+                                    style={{
+                                      fontSize: 11,
+                                      fontStyle: "italic",
+                                      color: "#c4956a",
+                                      marginTop: 4,
+                                    }}
+                                  >
+                                    {item.note}
                                   </p>
                                 )}
                               </>

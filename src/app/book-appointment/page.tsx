@@ -122,17 +122,16 @@ export default function BookAppointmentPage() {
     if (activeRole !== "All") {
       results = results.filter((m) => {
         const r = m.role.toLowerCase();
-        const f = activeRole.toLowerCase();
-        if (f === "psychiatrist") return r.includes("psychiatrist");
-        if (f === "psychologist") return r.includes("psychologist");
-        if (f === "therapist")
+        if (activeRole === "Psychiatrist") return r.includes("psychiatr");
+        if (activeRole === "Psychologist") return r.includes("psycholog") || r.includes("neuropsycholog");
+        if (activeRole === "Therapist")
           return (
             r.includes("therapist") ||
-            r.includes("psychotherapist") ||
+            r.includes("psychotherap") ||
             r.includes("therapy")
           );
-        if (f === "yoga therapist") return r.includes("yoga");
-        return r.includes(f);
+        if (activeRole === "Yoga Therapist") return r.includes("yoga");
+        return r.includes(activeRole.toLowerCase());
       });
     }
 

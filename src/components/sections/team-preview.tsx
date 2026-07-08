@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { clinicalTeam } from "@/data/team";
@@ -69,8 +69,9 @@ export const TeamPreview = () => {
           <p className="mt-4 text-[16px] text-[#7a7470] leading-[1.7] max-w-3xl mx-auto">
             At Manosuraksha, our experts are not just practitioners; they are
             architects of mental well-being, sculpted by training from premier
-            global institutes. Our multidisciplinary team forms a powerhouse of
-            unparalleled expertise.
+            global institutes. Our multidisciplinary team, spanning psychiatry,
+            addiction medicine, clinical psychology, psychiatric social work,
+            nursing, and yoga, forms a powerhouse of unparalleled expertise.
           </p>
         </motion.div>
 
@@ -154,27 +155,28 @@ export const TeamPreview = () => {
           })}
         </motion.div>
 
-        {/* View all CTA */}
+        {/* Meet the Full Team button */}
         <motion.div
-          className="mt-12 text-center"
+          className="text-center mt-12"
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4, delay: 0.3 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.5, delay: 0.3 }}
         >
           <Link
             href="/team"
             className={cn(
-              "inline-flex items-center gap-2.5 px-6 py-3 rounded-full",
-              "bg-[#5b7a5e]/8 text-[#5b7a5e] text-[14px] font-[700]",
-              "hover:bg-[#5b7a5e] hover:text-white",
-              "transition-all duration-300"
+              "inline-flex items-center gap-2 px-8 py-3.5 rounded-full",
+              "bg-[#5b7a5e] text-white text-[14px] font-[700]",
+              "hover:bg-[#4a6a4d] transition-colors duration-300",
+              "shadow-[0_4px_16px_rgba(91,122,94,0.3)]"
             )}
           >
             Meet the Full Team
             <ArrowRight className="w-4 h-4" />
           </Link>
         </motion.div>
+
       </div>
     </section>
   );

@@ -37,6 +37,7 @@ const contactInfo = [
     title: "Working Hours",
     detail: "Mon - Sat: 9:00 AM - 9:00 PM",
     subDetail: "Sunday: Closed",
+    note: "*prior appointment is highly recommended",
     color: "#9b7b5e",
     bg: "#9b7b5e15",
   },
@@ -79,6 +80,8 @@ export const ContactPreview = () => {
           <p className="mt-4 text-[16px] text-[#7a7470] leading-[1.7]">
             We want you to know that it&apos;s OKAY to feel the way you do.
             You&apos;re not alone in this, and you&apos;ve come to the right place.
+            Reach out to us because you deserve the best. Let us be your compass
+            on this journey to self-discovery, resilience, and a brighter future.
           </p>
         </motion.div>
 
@@ -173,6 +176,11 @@ export const ContactPreview = () => {
                           {item.subDetail && (
                             <p style={{ fontSize: 13, color: "#7a7470", marginTop: 2 }}>
                               {item.subDetail}
+                            </p>
+                          )}
+                          {"note" in item && item.note && (
+                            <p style={{ fontSize: 11, fontStyle: "italic", color: "#c4956a", marginTop: 4 }}>
+                              {item.note}
                             </p>
                           )}
                         </>

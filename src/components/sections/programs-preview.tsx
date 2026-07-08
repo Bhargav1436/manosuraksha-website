@@ -78,7 +78,9 @@ export const ProgramsPreview = () => {
           <p className="mt-4 text-[16px] text-[#7a7470] leading-[1.7]">
             At Manosuraksha, our commitment to your mental health goes beyond
             conventional approaches. Our specialized programs are meticulously
-            tailored to your personal journey.
+            tailored to reflect our unwavering dedication to your personal journey.
+            Here, transformation is not just a goal; it&apos;s our legacy of excellence
+            that sets the industry standard.
           </p>
         </motion.div>
 
@@ -143,23 +145,9 @@ export const ProgramsPreview = () => {
                 transition={{ duration: 0.8, ease: "easeOut" }}
                 className="max-w-[560px]"
               >
-                {/* Subtitle chip */}
-                <span
-                  className="inline-block px-3 py-1 rounded-full text-[11px] font-[700] uppercase tracking-wider text-white mb-4"
-                  style={{ backgroundColor: `${accent.color}aa` }}
-                >
-                  {current.subtitle}
-                </span>
-
                 <h3 className="text-[32px] lg:text-[40px] font-serif font-bold text-white leading-tight">
                   {current.title}
                 </h3>
-
-                <p className="mt-4 text-[15px] text-white/60 leading-[1.8] max-w-[480px]">
-                  {current.description.length > 200
-                    ? current.description.slice(0, 200) + "..."
-                    : current.description}
-                </p>
 
                 <Link
                   href={`/programs/${current.slug}`}

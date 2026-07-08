@@ -62,8 +62,8 @@ export default function TeamPage() {
             >
               At Manosuraksha, our experts are not just practitioners; they are architects
               of mental well-being, sculpted by training from premier global institutes.
-              Our multidisciplinary team spans psychiatry, addiction medicine, clinical
-              psychology, psychiatric social work, nursing, and yoga therapy.
+              Our multidisciplinary team, spanning psychiatry, addiction medicine, clinical
+              psychology, psychiatric social work, nursing, and yoga, forms a powerhouse of unparalleled expertise.
             </p>
           </div>
 
