@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { CommentActions } from "./comment-actions";
+import type { Comment } from "@prisma/client";
 
 interface Props {
   searchParams: Promise<{ status?: string }>;
@@ -20,7 +21,7 @@ export default async function AdminCommentsPage({ searchParams }: Props) {
   });
 
   const countMap = Object.fromEntries(
-    counts.map((c: { status: string; _count: number }) => [c.status, c._count])
+    counts.map((c) => [c.status ?? "unknown", c._count])
   ) as Record<string, number>;
   const totalCount = Object.values(countMap).reduce((a, b) => a + b, 0);
 
@@ -87,7 +88,7 @@ export default async function AdminCommentsPage({ searchParams }: Props) {
         </div>
       ) : (
         <div className="space-y-3">
-          {comments.map((comment) => (
+          {comments.map((comment: Comment) => (
             <div
               key={comment.id}
               className="bg-white rounded-[16px] p-5"

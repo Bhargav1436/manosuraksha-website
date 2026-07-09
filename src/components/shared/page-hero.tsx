@@ -11,7 +11,7 @@ interface BreadcrumbItem {
 
 interface PageHeroProps {
   title: string;
-  subtitle: string;
+  subtitle?: string;
   breadcrumb: string | BreadcrumbItem[];
 }
 
