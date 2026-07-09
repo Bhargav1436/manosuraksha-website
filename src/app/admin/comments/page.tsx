@@ -20,7 +20,7 @@ export default async function AdminCommentsPage({ searchParams }: Props) {
   });
 
   const countMap = Object.fromEntries(
-    counts.map((c) => [c.status, c._count])
+    counts.map((c: { status: string; _count: number }) => [c.status, c._count])
   ) as Record<string, number>;
   const totalCount = Object.values(countMap).reduce((a, b) => a + b, 0);
 
