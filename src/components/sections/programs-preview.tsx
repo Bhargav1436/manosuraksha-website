@@ -5,8 +5,15 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { programs } from "@/data/programs";
 import { cn } from "@/lib/utils";
+
+interface Program {
+  id: string;
+  slug: string;
+  title: string;
+  subtitle: string | null;
+  image: string | null;
+}
 
 const accentColors = [
   { color: "#5b7a5e", gradient: "linear-gradient(135deg, #5b7a5e, #7a9a7d)" },
@@ -17,30 +24,34 @@ const accentColors = [
   { color: "#c4956a", gradient: "linear-gradient(135deg, #c4956a, #dbb894)" },
 ];
 
-export const ProgramsPreview = () => {
+export const ProgramsPreview = ({ programs }: { programs: Program[] }) => {
   const [active, setActive] = useState(0);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   // Auto-advance every 5 seconds
   useEffect(() => {
+    if (!programs.length) return;
     intervalRef.current = setInterval(() => {
       setActive((prev) => (prev + 1) % programs.length);
     }, 7000);
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
-  }, []);
+  }, [programs.length]);
 
   const handleSelect = (index: number) => {
     setActive(index);
     if (intervalRef.current) clearInterval(intervalRef.current);
+    if (!programs.length) return;
     intervalRef.current = setInterval(() => {
       setActive((prev) => (prev + 1) % programs.length);
     }, 7000);
   };
 
-  const current = programs[active];
-  const accent = accentColors[active];
+  if (!programs.length) return null;
+
+  const current = programs[active] ?? programs[0];
+  const accent = accentColors[active % accentColors.length];
 
   return (
     <section className="bg-[#fdf8f2]">
@@ -107,13 +118,15 @@ export const ProgramsPreview = () => {
               exit={{ opacity: 0 }}
               transition={{ duration: 1, ease: "easeInOut" }}
             >
-              <Image
-                src={current.image}
-                alt={current.title}
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 1280px"
-              />
+              {current.image && (
+                <Image
+                  src={current.image}
+                  alt={current.title}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 1280px"
+                />
+              )}
               {/* Dark gradient overlay */}
               <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-black/20" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/20" />

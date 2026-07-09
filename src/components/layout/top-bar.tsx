@@ -32,10 +32,10 @@ export const TopBar = () => {
           className="flex items-center justify-between max-w-[1280px] mx-auto flex-wrap gap-2"
         >
           {/* Left: Contact */}
-          <div className="flex items-center gap-3 sm:gap-5 flex-wrap">
+          <div className="flex items-center gap-3 sm:gap-5">
             <a
               href={`mailto:${siteConfig.email}`}
-              className="topbar-link flex items-center gap-1.5"
+              className="topbar-link items-center gap-1.5 hidden sm:flex"
               style={{ color: "rgba(255,255,255,0.7)" }}
             >
               <Mail style={{ width: 13, height: 13, color: "#c4956a" }} />

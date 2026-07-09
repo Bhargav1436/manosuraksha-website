@@ -85,29 +85,60 @@ export const TeamPreview = () => {
         >
           {previewMembers.map((member, index) => {
             const accent = cardAccents[index % cardAccents.length];
+            const isFeatured = index === 0;
             return (
               <motion.div
                 key={member.id}
                 variants={cardVariants}
                 whileHover={{
-                  y: -8,
+                  y: isFeatured ? -10 : -8,
                   transition: { duration: 0.3, ease: "easeOut" },
                 }}
-                className="group"
+                className={cn("group", isFeatured && "lg:scale-[1.04] lg:z-10 relative")}
               >
+                {/* Outer glow ring for featured */}
+                {isFeatured && (
+                  <div
+                    className="absolute -inset-[3px] rounded-[23px] pointer-events-none"
+                    style={{
+                      background: "linear-gradient(135deg, #c4956a, #dbb894, #c4956a)",
+                      opacity: 0.6,
+                    }}
+                  />
+                )}
+
                 <div
                   className={cn(
-                    "bg-white rounded-[20px] overflow-hidden h-full relative",
-                    "shadow-[0_4px_16px_rgba(0,0,0,0.04)]",
-                    "group-hover:shadow-[0_20px_60px_rgba(0,0,0,0.1)]",
+                    "rounded-[20px] overflow-hidden h-full relative",
+                    isFeatured
+                      ? "shadow-[0_16px_48px_rgba(196,149,106,0.3)] group-hover:shadow-[0_28px_72px_rgba(196,149,106,0.45)]"
+                      : "bg-white shadow-[0_4px_16px_rgba(0,0,0,0.04)] group-hover:shadow-[0_20px_60px_rgba(0,0,0,0.1)]",
                     "transition-all duration-500"
                   )}
                   style={{
-                    border: "1px solid rgba(0,0,0,0.04)",
+                    background: isFeatured
+                      ? "linear-gradient(180deg, #fff9f4 0%, #ffffff 60%)"
+                      : undefined,
+                    border: isFeatured
+                      ? "none"
+                      : "1px solid rgba(0,0,0,0.04)",
                   }}
                 >
+                  {/* Featured badge */}
+                  {isFeatured && (
+                    <div
+                      className="absolute top-3 left-3 z-10 px-3 py-1.5 rounded-full text-[10px] font-[800] tracking-widest uppercase text-white"
+                      style={{
+                        background: "linear-gradient(135deg, #c4956a, #dbb894)",
+                        boxShadow: "0 3px 12px rgba(196,149,106,0.5)",
+                      }}
+                    >
+                      Director &amp; Founder
+                    </div>
+                  )}
+
                   {/* Photo */}
-                  <div className="relative w-full h-[280px] overflow-hidden">
+                  <div className={cn("relative w-full overflow-hidden", isFeatured ? "h-[320px]" : "h-[280px]")}>
                     <Image
                       src={member.imageSrc}
                       alt={member.name}
@@ -115,15 +146,43 @@ export const TeamPreview = () => {
                       className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
                       sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+                    <div
+                      className="absolute inset-0"
+                      style={{
+                        background: isFeatured
+                          ? "linear-gradient(to top, rgba(61,90,64,0.55) 0%, transparent 55%)"
+                          : "linear-gradient(to top, rgba(0,0,0,0.3) 0%, transparent 60%)",
+                      }}
+                    />
+                    {/* Institution label on photo for featured */}
+                    {isFeatured && (
+                      <div className="absolute bottom-3 left-0 right-0 flex justify-center">
+                        <span
+                          className="px-3 py-1 rounded-full text-[10px] font-[700] text-white/90 backdrop-blur-sm"
+                          style={{ background: "rgba(61,90,64,0.6)" }}
+                        >
+                          NIMHANS · Columbia · Harvard
+                        </span>
+                      </div>
+                    )}
                   </div>
 
                   {/* Details */}
-                  <div className="p-5 text-center">
-                    <h3 className="text-[16px] font-sans font-[800] text-[#3a3530]">
+                  <div className={cn("text-center", isFeatured ? "p-6" : "p-5")}>
+                    <h3
+                      className={cn(
+                        "font-sans font-[800]",
+                        isFeatured ? "text-[17px] text-[#3d5a40]" : "text-[16px] text-[#3a3530]"
+                      )}
+                    >
                       {member.name}
                     </h3>
-                    <p className="mt-1 text-[12px] font-[700] text-[#c4956a] leading-snug">
+                    <p
+                      className={cn(
+                        "mt-1 font-[700] leading-snug",
+                        isFeatured ? "text-[12px] text-[#c4956a]" : "text-[12px] text-[#c4956a]"
+                      )}
+                    >
                       {member.role}
                     </p>
                     <p className="mt-2 text-[11px] text-[#7a7470] leading-snug">
@@ -136,7 +195,9 @@ export const TeamPreview = () => {
                         <span
                           key={lang}
                           className="rounded-md px-2 py-0.5 text-[10px] font-[500] text-[#7a7470]"
-                          style={{ backgroundColor: accent.light }}
+                          style={{
+                            backgroundColor: isFeatured ? "rgba(196,149,106,0.1)" : accent.light,
+                          }}
                         >
                           {lang}
                         </span>
@@ -146,8 +207,12 @@ export const TeamPreview = () => {
 
                   {/* Colored bottom accent */}
                   <div
-                    className="absolute bottom-0 left-0 right-0 h-[3px]"
-                    style={{ background: accent.gradient }}
+                    className={cn("absolute bottom-0 left-0 right-0", isFeatured ? "h-[4px]" : "h-[3px]")}
+                    style={{
+                      background: isFeatured
+                        ? "linear-gradient(90deg, #c4956a, #dbb894, #c4956a)"
+                        : accent.gradient,
+                    }}
                   />
                 </div>
               </motion.div>

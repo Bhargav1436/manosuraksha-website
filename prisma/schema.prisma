@@ -1,0 +1,40 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Program {
+  id           String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title        String
+  slug         String    @unique
+  subtitle     String?
+  description  String?
+  image        String?
+  conditions   String[]
+  isActive     Boolean?  @default(true) @map("is_active")
+  displayOrder Int?      @default(0) @map("display_order")
+  createdAt    DateTime? @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  @@map("programs")
+}
+
+model Comment {
+  id          String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  programSlug String?   @map("program_slug")
+  authorName  String    @map("author_name")
+  authorEmail String    @map("author_email")
+  content     String
+  status      String?   @default("pending")
+  createdAt   DateTime? @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  @@map("comments")
+}
+
+model settings {
+  key        String    @id
+  value      String
+  updated_at DateTime? @default(now()) @db.Timestamptz(6)
+}

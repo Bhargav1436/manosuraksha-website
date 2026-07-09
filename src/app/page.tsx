@@ -7,8 +7,17 @@ import { TeamPreview } from "@/components/sections/team-preview";
 import { CTASection } from "@/components/sections/cta-section";
 import { ContactPreview } from "@/components/sections/contact-preview";
 import { SectionDivider } from "@/components/shared/section-divider";
+import { prisma } from "@/lib/prisma";
 
-export default function Home() {
+export const dynamic = "force-dynamic";
+
+export default async function Home() {
+  const programs = await prisma.program.findMany({
+    where: { isActive: true },
+    orderBy: { displayOrder: "asc" },
+    select: { id: true, slug: true, title: true, subtitle: true, image: true },
+  });
+
   return (
     <>
       <Hero />
@@ -17,7 +26,7 @@ export default function Home() {
       <SectionDivider />
       <div id="beliefs" style={{ scrollMarginTop: 100 }}><BeliefsPreview /></div>
       <SectionDivider />
-      <div id="programs" style={{ scrollMarginTop: 100 }}><ProgramsPreview /></div>
+      <div id="programs" style={{ scrollMarginTop: 100 }}><ProgramsPreview programs={programs} /></div>
       <SectionDivider />
       <div id="team" style={{ scrollMarginTop: 100 }}><TeamPreview /></div>
       <CTASection />

@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
 import { Libre_Baskerville, Nunito_Sans } from "next/font/google";
-import { TopBar } from "@/components/layout/top-bar";
-import { Navbar } from "@/components/layout/navbar";
-import { Footer } from "@/components/layout/footer";
-import { FoundationFab } from "@/components/shared/foundation-fab";
+import { PublicShell } from "@/components/layout/public-shell";
 import "./globals.css";
 
 const libreBaskerville = Libre_Baskerville({
@@ -19,6 +16,12 @@ const nunitoSans = Nunito_Sans({
   display: "swap",
   variable: "--font-sans",
 });
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
 
 export const metadata: Metadata = {
   title: {
@@ -62,11 +65,7 @@ export default function RootLayout({
       className={`${libreBaskerville.variable} ${nunitoSans.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <TopBar />
-        <Navbar />
-        <main className="min-h-screen flex-1" style={{ paddingTop: 108 }}>{children}</main>
-        <Footer />
-        <FoundationFab />
+        <PublicShell>{children}</PublicShell>
       </body>
     </html>
   );
