@@ -6,6 +6,8 @@ import { usePathname, useRouter } from "next/navigation";
 import { LayoutDashboard, BookOpen, MessageSquare, Settings, LogOut, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+const authPaths = ["/admin/login", "/admin/forgot-password", "/admin/reset-password"];
+
 const navItems = [
   { label: "Dashboard", href: "/admin", icon: LayoutDashboard },
   { label: "Programs", href: "/admin/programs", icon: BookOpen },
@@ -18,7 +20,7 @@ const NavLinks = ({ onClose }: { onClose?: () => void }) => {
   const router = useRouter();
 
   const handleLogout = async () => {
-    await fetch("/api/admin/auth", { method: "DELETE" });
+    await fetch("/api/admin/logout", { method: "POST" });
     router.push("/admin/login");
     router.refresh();
   };
@@ -75,6 +77,9 @@ const Logo = () => (
 
 export const AdminSidebar = () => {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+
+  if (authPaths.some(p => pathname.startsWith(p))) return null;
 
   return (
     <>

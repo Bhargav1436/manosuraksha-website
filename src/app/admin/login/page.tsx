@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Eye, EyeOff, Lock, User, AlertCircle } from "lucide-react";
+import { Eye, EyeOff, Lock, User, AlertCircle, ArrowLeft } from "lucide-react";
 
 export default function AdminLoginPage() {
   const router = useRouter();
@@ -233,12 +233,18 @@ export default function AdminLoginPage() {
           </form>
         </div>
 
-        <p
-          className="text-center mt-6 text-[12px]"
-          style={{ color: "#7a7470" }}
-        >
-          Manosuraksha Admin Panel · Restricted Access
-        </p>
+        <div className="flex items-center justify-between mt-6">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-1.5 text-[12px] font-[600] hover:underline"
+            style={{ color: "#7a7470" }}
+          >
+            <ArrowLeft className="w-3 h-3" /> Back to Website
+          </Link>
+          <p className="text-[12px]" style={{ color: "#7a7470" }}>
+            Restricted Access
+          </p>
+        </div>
       </div>
     </div>
   );

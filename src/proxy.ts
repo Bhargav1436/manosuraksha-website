@@ -5,10 +5,9 @@ const secret = new TextEncoder().encode(
   process.env.ADMIN_COOKIE_SECRET ?? "fallback-secret-change-me"
 );
 
-export async function middleware(req: NextRequest) {
+export async function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
-  // Only protect /admin routes (except /admin/login)
   const publicAdminPaths = ["/admin/login", "/admin/forgot-password", "/admin/reset-password"];
   if (pathname.startsWith("/admin") && !publicAdminPaths.some(p => pathname.startsWith(p))) {
     const token = req.cookies.get("admin_session")?.value;
